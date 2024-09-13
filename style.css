@@ -1,25 +1,57 @@
 :root{
-    --bg-color1: #212529;
-    --bg-color2: #2a2b2d;
-    --aqi-1: #d4e157;
-    --aqi-2: #ffee58;
-    --aqi-3: #ffca28;
-    --aqi-4: #ff7043;
-    --aqi-5: #ef5350;
+    :root {
+        --bg-color1: #212529;
+        --bg-color2: #2a2b2d;
+        --text-color: #fff;
+        --card-bg-color: rgba(46, 45, 45, 0.699);
+        --button-bg-color: #fff;
+        --button-text-color: #000;
+        --aqi-1: #d4e157;
+        --aqi-2: #ffee58;
+        --aqi-3: #ffca28;
+        --aqi-4: #ff7043;
+        --aqi-5: #ef5350;
+    }
+}
+
+.light-mode {
+   
+    --background-image: url('light.avif');
+    --text-color: #000;
+    --card-bg-color: rgba(255, 255, 255, 0.9);
+    --button-bg-color: #000;
+    --button-text-color: #fff;
+}
+
+#themeToggleBtn {
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('dark.avif');
+    background-attachment: fixed; 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    min-height: 100vh;
+    background-color: var(--bg-color1);
+    color: #fff;
+    font-family: sans-serif;
+    padding: 0 15px;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
-    min-height: 100vh;
-    background-color: var(--bg-color1);
-    color: #fff;
-    font-family: sans-serif;
-    padding: 0 15px;
 }
 
 hr {
@@ -69,10 +101,11 @@ hr {
 }
 
 .card {
-    background-color: var(--bg-color2);
+    background-color: rgba(46, 45, 45, 0.699);
     padding: 15px;
     border-radius: 15px;
     margin-bottom: 15px;
+
 }
 
 .card p {

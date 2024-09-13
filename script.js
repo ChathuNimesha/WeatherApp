@@ -1,3 +1,4 @@
+// Grab necessary elements
 let cityInput = document.getElementById('city_input'),
     searchBtn = document.getElementById('searchBtn'),
     locationBtn = document.getElementById('locationBtn'),
@@ -10,14 +11,11 @@ let cityInput = document.getElementById('city_input'),
     windSpeedVal = document.getElementById('windSpeedVal'),
     feelsVal = document.getElementById('feelsVal'),
     hourlyForecastCard = document.querySelector('.hourly-forecast'),
+    fiveDaysForecastCard = document.querySelector('.day-forecast'),
+    sunriseCard = document.querySelector('.highlights .card:nth-of-type(2)'),
     aqiList = ['Good', 'Fair', 'Moderate', 'Poor', 'Very Poor'];
 
-let sunriseCard = document.querySelector('.highlights .card:nth-of-type(2)');
-console.log(sunriseCard); // Should log the element or null
-let fiveDaysForecastCard = document.querySelector('.day-forecast');
-console.log(fiveDaysForecastCard); // Check if this logs an element or null
-
-
+// Function to fetch and display weather details
 function getWeatherDetails(name, lat, lon, country, state) {
     let FORECAST_API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
     let WEATHER_API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
@@ -85,10 +83,6 @@ function getWeatherDetails(name, lat, lon, country, state) {
             return res.json();
         })
         .then(data => {
-
-
-            console.log(data);
-
             const date = new Date();
             const { sunrise, sunset, timezone, visibility } = data.sys;
             const { humidity, pressure, feels_like } = data.main;
@@ -145,7 +139,7 @@ function getWeatherDetails(name, lat, lon, country, state) {
             pressureVal.innerHTML = `${pressure} hPa`;
             visibilityVal.innerHTML = `${visibility / 1000} km`;
             windSpeedVal.innerHTML = `${speed} m/s`;
-            feelsVal.innerHTML = `${(feels_like - 273.15).toFixed(2)}&deg;C`;
+            feelsVal.innerHTML = `${feels_like.toFixed(2)}&deg;C`;
         })
         .catch(error => {
             console.error('Error fetching current weather:', error);
@@ -159,6 +153,7 @@ function getWeatherDetails(name, lat, lon, country, state) {
             let hourlyForecast = data.list;
             hourlyForecastCard.innerHTML = '';
 
+            // Update hourly forecast (8-hourly)
             for (let i = 0; i < 8; i++) {
                 let hrForecastDate = new Date(hourlyForecast[i].dt_txt);
                 let hr = hrForecastDate.getHours();
@@ -176,6 +171,7 @@ function getWeatherDetails(name, lat, lon, country, state) {
                 `;
             }
 
+            // Update 5-day forecast
             let uniqueForecastDays = [];
             let fiveDaysForecast = data.list.filter(forecast => {
                 let forecastDate = new Date(forecast.dt_txt).getDate();
@@ -207,6 +203,7 @@ function getWeatherDetails(name, lat, lon, country, state) {
         });
 }
 
+// Fetch city coordinates based on user input
 function getCityCoordinates() {
     let cityName = cityInput.value.trim();
     cityInput.value = '';  // Clear the input field
@@ -233,6 +230,7 @@ function getCityCoordinates() {
         });
 }
 
+// Fetch user's current location coordinates
 function getUserCoordinates() {
     navigator.geolocation.getCurrentPosition(position => {
         let { latitude, longitude } = position.coords;
@@ -256,7 +254,7 @@ function getUserCoordinates() {
     });
 }
 
-// Add click event listener for the search button
+// Add click event listeners for search and location buttons
 searchBtn.addEventListener('click', getCityCoordinates);
 locationBtn.addEventListener('click', getUserCoordinates);
 cityInput.addEventListener('keyup', e => {
