@@ -5,20 +5,18 @@ Weather App
 The Weather App provides real-time weather updates, forecasts, maps, and alerts, ensuring reliable and up-to-date information with a user-friendly design.
 Table of Content
 - Demo
-- Screenshots
 - Features
 - Technologies Used
 - API Reference
 - Documentation
-- Environment Variables
+
 
 
 Demo
 
 Live Demo:https://chathunimesha.github.io/WeatherApp/
 
-Screenshots
-- ![Weather App Screenshot](#) (Add screenshots here)
+
 
 Features
 
